@@ -1,0 +1,24 @@
+<header class="site-header">
+  <div class="container">
+    <div class="brand">
+      <div class="brand-mark">Logo</div>
+      <div>
+        <div class="brand-kicker">COUNTY GOVERNMENT OF KISII</div>
+        <div class="brand-name">Office Directory</div>
+      </div>
+    </div>
+    <nav class="site-nav" aria-label="Main">
+      <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
+      <a href="#">Directory</a>
+      <a href="#">Departments</a>
+      <a href="#">Offices</a>
+      <a href="#">Staff</a>
+      <a href="#">Audit log</a>
+    </nav>
+    <div class="userbar">
+      <span class="role-pill">Administrator</span>
+      <span>demo.admin</span>
+      <a href="#">Sign out</a>
+    </div>
+  </div>
+</header>
