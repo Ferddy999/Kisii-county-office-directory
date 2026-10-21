@@ -3,8 +3,67 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div>
-  <h1 class="page-title">Dashboard</h1>
-  <div class="page-subtitle">Overview of departments, offices and directory entries.</div>
+<div class="page-head">
+  <div>
+    <h1 class="page-title">Dashboard</h1>
+    <div class="page-subtitle">Overview of departments, offices and directory entries.</div>
+  </div>
+  <div class="actions">
+    <span class="actions-note">Administrator only</span>
+    <a href="#" class="btn btn-outline">Add office</a>
+    <a href="#" class="btn btn-primary">Add staff member</a>
+  </div>
+</div>
+
+<form class="search-bar" action="#" method="get" role="search">
+  <label for="q" class="sr-only">Search the directory</label>
+  <input id="q" name="q" type="search" placeholder="Search by staff name, office, department, location or service">
+  <button type="submit">Search</button>
+</form>
+
+<div class="stat-grid">
+  {% for t in totals %}
+  <div class="stat-card">
+    <div class="stat-label">{{ t.label }}</div>
+    <div class="stat-value">{{ t.value }}</div>
+    <div class="stat-note">{{ t.note }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="dash-columns">
+  <section class="panel panel-main">
+    <div class="panel-head">
+      <h2 class="panel-title">Departments</h2>
+      <a href="#">View all</a>
+    </div>
+    <div class="dept-row head">
+      <div>Name</div><div class="num">Offices</div><div class="num">Staff</div>
+    </div>
+    {% for d in departments %}
+    <div class="dept-row">
+      <div>{{ d.name }}</div>
+      <div class="num">{{ d.office_count }}</div>
+      <div class="num">{{ d.staff_count }}</div>
+    </div>
+    {% empty %}
+    <div class="empty">No departments yet. Run the seed command.</div>
+    {% endfor %}
+  </section>
+
+  <section class="panel panel-side">
+    <div class="panel-head">
+      <h2 class="panel-title">Recent changes</h2>
+      <span class="panel-note">Administrator only</span>
+    </div>
+    {% for c in recent_changes %}
+    <div class="change-row">
+      <div class="change-what">{{ c.get_action_display }} {{ c.model_name }}: {{ c.object_repr }}</div>
+      <div class="change-meta">{{ c.username|default:"system" }} · {{ c.created_at|date:"D j M, H:i" }}</div>
+    </div>
+    {% empty %}
+    <div class="empty">No changes recorded yet.</div>
+    {% endfor %}
+  </section>
 </div>
 {% endblock %}
