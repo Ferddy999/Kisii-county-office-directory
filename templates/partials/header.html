@@ -7,18 +7,23 @@
         <div class="brand-name">Office Directory</div>
       </div>
     </div>
+    {% if user.is_authenticated %}
     <nav class="site-nav" aria-label="Main">
       <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
       <a href="#">Directory</a>
       <a href="#">Departments</a>
       <a href="#">Offices</a>
       <a href="#">Staff</a>
-      <a href="#">Audit log</a>
+      {% if perms.audit.view_auditlog %}<a href="#">Audit log</a>{% endif %}
     </nav>
     <div class="userbar">
-      <span class="role-pill">Administrator</span>
-      <span>demo.admin</span>
-      <a href="#">Sign out</a>
+      <span class="role-pill {% if not is_administrator %}role-pill--user{% endif %}">{{ role_label }}</span>
+      <span>{{ user.get_username }}</span>
+      <form method="post" action="{% url 'logout' %}" class="logout-form">
+        {% csrf_token %}
+        <button type="submit" class="link-button">Sign out</button>
+      </form>
     </div>
+    {% endif %}
   </div>
 </header>

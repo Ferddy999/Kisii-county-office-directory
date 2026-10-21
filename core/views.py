@@ -18,9 +18,10 @@ def dashboard(request):
         {"label": "Offices", "value": Office.objects.filter(is_active=True).count(), "note": "Active"},
         {"label": "Staff entries", "value": Staff.objects.filter(is_active=True).count(), "note": "Active"},
     ]
+    can_see_audit = request.user.has_perm("audit.view_auditlog")
     context = {
         "totals": totals,
         "departments": departments,
-        "recent_changes": AuditLog.objects.all()[:5],
+        "recent_changes": AuditLog.objects.all()[:5] if can_see_audit else [],
     }
     return render(request, "core/dashboard.html", context)

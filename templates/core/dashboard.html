@@ -8,11 +8,13 @@
     <h1 class="page-title">Dashboard</h1>
     <div class="page-subtitle">Overview of departments, offices and directory entries.</div>
   </div>
+  {% if perms.offices.add_office %}
   <div class="actions">
     <span class="actions-note">Administrator only</span>
     <a href="#" class="btn btn-outline">Add office</a>
     <a href="#" class="btn btn-primary">Add staff member</a>
   </div>
+  {% endif %}
 </div>
 
 <form class="search-bar" action="#" method="get" role="search">
@@ -51,6 +53,7 @@
     {% endfor %}
   </section>
 
+  {% if perms.audit.view_auditlog %}
   <section class="panel panel-side">
     <div class="panel-head">
       <h2 class="panel-title">Recent changes</h2>
@@ -59,11 +62,12 @@
     {% for c in recent_changes %}
     <div class="change-row">
       <div class="change-what">{{ c.get_action_display }} {{ c.model_name }}: {{ c.object_repr }}</div>
-      <div class="change-meta">{{ c.username|default:"system" }} · {{ c.created_at|date:"D j M, H:i" }}</div>
+      <div class="change-meta">{{ c.username|default:"system" }} &middot; {{ c.created_at|date:"D j M, H:i" }}</div>
     </div>
     {% empty %}
     <div class="empty">No changes recorded yet.</div>
     {% endfor %}
   </section>
+  {% endif %}
 </div>
 {% endblock %}
