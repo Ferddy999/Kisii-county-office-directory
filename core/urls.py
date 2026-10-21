@@ -1,8 +1,7 @@
-from django.urls import path
+﻿from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('core.urls')),
+    path("", views.dashboard, name="dashboard"),
 ]
