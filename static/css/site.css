@@ -1,11 +1,11 @@
 :root {
-  --blue: #0B4F9C;
-  --blue-dark: #083A73;
-  --blue-tint: #E6EEF8;
-  --green: #1B7A3D;
+  --blue: #0C3C5C;
+  --blue-dark: #082B42;
+  --blue-tint: #E3EEF5;
+  --green: #3D7A12;
   --green-tint: #E3F2E8;
   --green-text: #14562B;
-  --gold: #C9A227;
+  --gold: #F2D50F;
   --ink: #1A2430;
   --muted: #55606E;
   --line: #DDE3EA;
@@ -255,3 +255,5 @@ a.page:hover { background: var(--page); color: var(--ink); }
   .staff-cols, .office-cols { grid-template-columns: 1fr; gap: 4px; }
   .filter-panel { max-width: none; flex-basis: 100%; }
 }
+
+.brand-logo { width: 44px; height: 44px; display: block; }
