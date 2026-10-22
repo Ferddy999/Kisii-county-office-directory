@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Access denied{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+  <h1 class="page-title">Access denied</h1>
+  <p>Your account does not have permission to open this page.</p>
+  <a href="{% url 'dashboard' %}" class="btn btn-primary">Back to dashboard</a>
+</div>
+{% endblock %}

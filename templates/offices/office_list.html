@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Offices{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1 class="page-title">Offices</h1>
+    <div class="page-subtitle">{{ paginator.count }} office{{ paginator.count|pluralize }} registered.</div>
+  </div>
+  {% if perms.offices.add_office %}
+  <div class="actions">
+    <a href="{% url 'office_add' %}" class="btn btn-primary">Add office</a>
+  </div>
+  {% endif %}
+</div>
+
+<section class="panel">
+  <div class="result-row manage-cols head">
+    <div>Office</div><div>Department</div><div>Location</div><div>Ext.</div><div>Status</div><div>Actions</div>
+  </div>
+  {% for o in object_list %}
+  <div class="result-row manage-cols">
+    <div class="strong">{{ o.name }}</div>
+    <div>{{ o.department.name }}</div>
+    <div>{{ o.building }}{% if o.floor_room %}, {{ o.floor_room }}{% endif %}</div>
+    <div>{{ o.phone_ext }}</div>
+    <div><span class="status{% if not o.is_active %} off{% endif %}">{% if o.is_active %}Active{% else %}Inactive{% endif %}</span></div>
+    <div class="row-actions">
+      {% if perms.offices.change_office %}<a href="{% url 'office_edit' o.pk %}">Edit</a>{% endif %}
+      {% if perms.offices.delete_office %}<a href="{% url 'office_delete' o.pk %}" class="link-danger">Delete</a>{% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <div class="empty">No offices yet.</div>
+  {% endfor %}
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Pagination">
+    <div class="pages">
+      {% if page_obj.has_previous %}<a class="page" href="?page={{ page_obj.previous_page_number }}">Prev</a>{% endif %}
+      <span class="page current" aria-current="page">{{ page_obj.number }}</span>
+      <span class="result-count">of {{ paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a class="page" href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+    </div>
+  </nav>
+  {% endif %}
+</section>
+{% endblock %}

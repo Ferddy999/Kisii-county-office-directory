@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Delete office{% endblock %}
+
+{% block content %}
+<div class="form-card">
+  <h1 class="page-title">Delete office</h1>
+  <p>Are you sure you want to delete <strong>{{ object.name }}</strong> ({{ object.department.name }})? This cannot be undone.</p>
+  {% if object.staff_members.exists %}
+  <div class="form-error" role="alert">This office has {{ object.staff_members.count }} staff assigned and cannot be deleted until they are moved.</div>
+  {% endif %}
+  <form method="post" class="form-actions">
+    {% csrf_token %}
+    <button type="submit" class="btn-danger">Delete office</button>
+    <a href="{% url 'office_list' %}" class="btn-reset">Cancel</a>
+  </form>
+</div>
+{% endblock %}

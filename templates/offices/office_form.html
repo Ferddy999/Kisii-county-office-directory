@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit office{% else %}Add office{% endif %}{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="page-title">{% if object %}Edit office{% else %}Add office{% endif %}</h1>
+  <div class="page-subtitle">Fields marked * are required.</div>
+</div>
+
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+  <div class="form-error" role="alert">{{ form.non_field_errors.0 }}</div>
+  {% endif %}
+  <div class="form-grid">
+    {% include "partials/form_field.html" with field=form.name %}
+    {% include "partials/form_field.html" with field=form.department %}
+    {% include "partials/form_field.html" with field=form.directorate %}
+    {% include "partials/form_field.html" with field=form.building %}
+    {% include "partials/form_field.html" with field=form.floor_room %}
+    {% include "partials/form_field.html" with field=form.phone_ext %}
+    {% include "partials/form_field.html" with field=form.email %}
+  </div>
+  {% include "partials/form_field.html" with field=form.services %}
+  {% include "partials/form_field.html" with field=form.is_active %}
+  <div class="form-actions">
+    <button type="submit" class="btn-submit">Save office</button>
+    <a href="{% url 'office_list' %}" class="btn-reset">Cancel</a>
+  </div>
+</form>
+{% endblock %}

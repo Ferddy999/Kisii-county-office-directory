@@ -257,3 +257,45 @@ a.page:hover { background: var(--page); color: var(--ink); }
 }
 
 .brand-logo { width: 44px; height: 44px; display: block; }
+
+
+/* forms, messages and management lists */
+.messages { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.message { padding: 12px 16px; border: 1px solid var(--line); border-radius: 6px; font-size: 14px; background: var(--white); }
+.message.success { background: #E3F2E8; border-color: #B9DFC5; color: #14562B; }
+.message.error { background: #FCEBEB; border-color: #F2C2C2; color: #8A1F1F; }
+
+.form-card {
+  max-width: 760px; padding: 28px;
+  background: var(--white); border: 1px solid var(--line); border-radius: 8px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.form-card .field select { height: 44px; font-size: 15px; }
+.field input[type="checkbox"] { height: auto; width: 18px; }
+.field > div label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 400; }
+.field-check label { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.help { font-size: 12px; color: var(--muted); }
+.field-error { font-size: 13px; color: #8A1F1F; }
+.has-error input, .has-error select { border-color: #8A1F1F; }
+.req { color: #8A1F1F; }
+.form-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.form-actions .btn-submit { padding: 0 24px; }
+.btn-danger {
+  height: 44px; padding: 0 20px; border: 0; border-radius: 6px; cursor: pointer;
+  background: #A32020; color: var(--white); font-size: 14px; font-weight: 600;
+}
+
+.manage-cols { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.4fr) minmax(0, 1fr) 70px 90px 140px; }
+.status {
+  display: inline-block; padding: 2px 10px; border-radius: 999px;
+  background: var(--green-tint); color: var(--green-text); font-size: 12px; font-weight: 600;
+}
+.status.off { background: #EDEFF2; color: #3A4552; }
+.row-actions { display: flex; gap: 12px; font-size: 14px; }
+.link-danger { color: #A32020; }
+
+@media (max-width: 720px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .manage-cols { grid-template-columns: 1fr; gap: 4px; }
+}
