@@ -299,3 +299,11 @@ a.page:hover { background: var(--page); color: var(--ink); }
   .form-grid { grid-template-columns: 1fr; }
   .manage-cols { grid-template-columns: 1fr; gap: 4px; }
 }
+
+
+/* staff management list */
+.staff-manage-cols { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr) minmax(0, 1.4fr) 130px 90px 140px; }
+
+@media (max-width: 720px) {
+  .staff-manage-cols { grid-template-columns: 1fr; gap: 4px; }
+}

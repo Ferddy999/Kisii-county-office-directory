@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Remove staff member{% endblock %}
+
+{% block content %}
+<div class="form-card">
+  <h1 class="page-title">Remove staff member</h1>
+  <p>Are you sure you want to remove <strong>{{ object.full_name }}</strong> ({{ object.designation }}) from the directory? This cannot be undone.</p>
+  <form method="post" class="form-actions">
+    {% csrf_token %}
+    <button type="submit" class="btn-danger">Remove staff member</button>
+    <a href="{% url 'staff_list' %}" class="btn-reset">Cancel</a>
+  </form>
+</div>
+{% endblock %}

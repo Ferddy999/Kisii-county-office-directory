@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Staff{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1 class="page-title">Staff</h1>
+    <div class="page-subtitle">{{ paginator.count }} staff member{{ paginator.count|pluralize }} registered.</div>
+  </div>
+  {% if perms.staff.add_staff %}
+  <div class="actions">
+    <a href="{% url 'staff_add' %}" class="btn btn-primary">Add staff member</a>
+  </div>
+  {% endif %}
+</div>
+
+<section class="panel">
+  <div class="result-row staff-manage-cols head">
+    <div>Name</div><div>Designation</div><div>Department / office</div><div>Work phone</div><div>Status</div><div>Actions</div>
+  </div>
+  {% for s in object_list %}
+  <div class="result-row staff-manage-cols">
+    <div>
+      <div class="strong">{{ s.full_name }}</div>
+      <div class="sub wrap-anywhere">{{ s.work_email }}</div>
+    </div>
+    <div>{{ s.designation }}</div>
+    <div>
+      <div>{{ s.department.name }}</div>
+      <div class="sub">{{ s.office.name }}</div>
+    </div>
+    <div>{{ s.work_phone }}</div>
+    <div><span class="status{% if not s.is_active %} off{% endif %}">{% if s.is_active %}Active{% else %}Inactive{% endif %}</span></div>
+    <div class="row-actions">
+      {% if perms.staff.change_staff %}<a href="{% url 'staff_edit' s.pk %}">Edit</a>{% endif %}
+      {% if perms.staff.delete_staff %}<a href="{% url 'staff_delete' s.pk %}" class="link-danger">Delete</a>{% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <div class="empty">No staff yet.</div>
+  {% endfor %}
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Pagination">
+    <div class="pages">
+      {% if page_obj.has_previous %}<a class="page" href="?page={{ page_obj.previous_page_number }}">Prev</a>{% endif %}
+      <span class="page current" aria-current="page">{{ page_obj.number }}</span>
+      <span class="result-count">of {{ paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a class="page" href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+    </div>
+  </nav>
+  {% endif %}
+</section>
+{% endblock %}

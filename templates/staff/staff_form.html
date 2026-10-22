@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Edit staff member{% else %}Add staff member{% endif %}{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="page-title">{% if object %}Edit staff member{% else %}Add staff member{% endif %}</h1>
+  <div class="page-subtitle">Fields marked * are required.</div>
+</div>
+
+<form method="post" class="form-card">
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+  <div class="form-error" role="alert">{{ form.non_field_errors.0 }}</div>
+  {% endif %}
+  <div class="form-grid">
+    {% include "partials/form_field.html" with field=form.full_name %}
+    {% include "partials/form_field.html" with field=form.designation %}
+    {% include "partials/form_field.html" with field=form.department %}
+    {% include "partials/form_field.html" with field=form.office %}
+    {% include "partials/form_field.html" with field=form.work_email %}
+    {% include "partials/form_field.html" with field=form.work_phone %}
+  </div>
+  {% include "partials/form_field.html" with field=form.is_active %}
+  <div class="form-actions">
+    <button type="submit" class="btn-submit">Save staff member</button>
+    <a href="{% url 'staff_list' %}" class="btn-reset">Cancel</a>
+  </div>
+</form>
+{% endblock %}
