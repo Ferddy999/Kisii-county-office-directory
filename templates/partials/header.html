@@ -10,7 +10,7 @@
     {% if user.is_authenticated %}
     <nav class="site-nav" aria-label="Main">
       <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
-      <a href="#">Directory</a>
+      <a href="{% url 'directory' %}" {% if request.resolver_match.url_name == 'directory' %}class="active"{% endif %}>Directory</a>
       <a href="#">Departments</a>
       <a href="#">Offices</a>
       <a href="#">Staff</a>

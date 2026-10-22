@@ -17,7 +17,7 @@
   {% endif %}
 </div>
 
-<form class="search-bar" action="#" method="get" role="search">
+<form class="search-bar" action="{% url 'directory' %}" method="get" role="search">
   <label for="q" class="sr-only">Search the directory</label>
   <input id="q" name="q" type="search" placeholder="Search by staff name, office, department, location or service">
   <button type="submit">Search</button>
