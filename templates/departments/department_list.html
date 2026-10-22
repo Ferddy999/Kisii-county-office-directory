@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Departments{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <div>
+    <h1 class="page-title">Departments</h1>
+    <div class="page-subtitle">{{ paginator.count }} department{{ paginator.count|pluralize }} registered.</div>
+  </div>
+  <div class="actions">
+    <a href="{% url 'directorate_list' %}" class="btn btn-outline">Directorates</a>
+    {% if perms.departments.add_department %}
+    <a href="{% url 'department_add' %}" class="btn btn-primary">Add department</a>
+    {% endif %}
+  </div>
+</div>
+
+<section class="panel">
+  <div class="result-row dept-manage-cols head">
+    <div>Department</div><div class="num">Directorates</div><div class="num">Offices</div><div class="num">Staff</div><div>Status</div><div>Actions</div>
+  </div>
+  {% for d in object_list %}
+  <div class="result-row dept-manage-cols">
+    <div>
+      <div class="strong">{{ d.name }}</div>
+      <div class="sub">Code: {{ d.code }}</div>
+    </div>
+    <div class="num">{{ d.directorate_count }}</div>
+    <div class="num">{{ d.office_count }}</div>
+    <div class="num">{{ d.staff_count }}</div>
+    <div><span class="status{% if not d.is_active %} off{% endif %}">{% if d.is_active %}Active{% else %}Inactive{% endif %}</span></div>
+    <div class="row-actions">
+      {% if perms.departments.change_department %}<a href="{% url 'department_edit' d.pk %}">Edit</a>{% endif %}
+      {% if perms.departments.delete_department %}<a href="{% url 'department_delete' d.pk %}" class="link-danger">Delete</a>{% endif %}
+    </div>
+  </div>
+  {% empty %}
+  <div class="empty">No departments yet.</div>
+  {% endfor %}
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Pagination">
+    <div class="pages">
+      {% if page_obj.has_previous %}<a class="page" href="?page={{ page_obj.previous_page_number }}">Prev</a>{% endif %}
+      <span class="page current" aria-current="page">{{ page_obj.number }}</span>
+      <span class="result-count">of {{ paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a class="page" href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+    </div>
+  </nav>
+  {% endif %}
+</section>
+{% endblock %}

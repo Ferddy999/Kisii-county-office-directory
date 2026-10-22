@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Delete directorate{% endblock %}
+
+{% block content %}
+<div class="form-card">
+  <h1 class="page-title">Delete directorate</h1>
+  <p>Are you sure you want to delete <strong>{{ object.name }}</strong> ({{ object.department.name }})? This cannot be undone. A directorate that still has offices cannot be deleted.</p>
+  <form method="post" class="form-actions">
+    {% csrf_token %}
+    <button type="submit" class="btn-danger">Delete directorate</button>
+    <a href="{% url 'directorate_list' %}" class="btn-reset">Cancel</a>
+  </form>
+</div>
+{% endblock %}

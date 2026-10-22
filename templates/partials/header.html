@@ -12,7 +12,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
       <a href="{% url 'directory' %}" {% if request.resolver_match.url_name == 'directory' %}class="active"{% endif %}>Directory</a>
-      <a href="#">Departments</a>
+      <a href="{% url 'department_list' %}" {% if request.path|slice:":13" == "/departments/" %}class="active"{% endif %}>Departments</a>
       <a href="{% url 'office_list' %}" {% if request.path|slice:":9" == "/offices/" %}class="active"{% endif %}>Offices</a>
       <a href="{% url 'staff_list' %}" {% if request.path|slice:":7" == "/staff/" %}class="active"{% endif %}>Staff</a>
       {% if perms.audit.view_auditlog %}<a href="#">Audit log</a>{% endif %}

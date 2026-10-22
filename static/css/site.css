@@ -307,3 +307,17 @@ a.page:hover { background: var(--page); color: var(--ink); }
 @media (max-width: 720px) {
   .staff-manage-cols { grid-template-columns: 1fr; gap: 4px; }
 }
+
+
+/* department and directorate management lists */
+.dept-manage-cols { grid-template-columns: minmax(0, 2fr) 100px 70px 70px 90px 140px; }
+.dir-manage-cols { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) 140px; }
+.field textarea {
+  padding: 10px 12px; font: inherit; font-size: 15px;
+  border: 1px solid var(--field); border-radius: 6px;
+}
+
+@media (max-width: 720px) {
+  .dept-manage-cols, .dir-manage-cols { grid-template-columns: 1fr; gap: 4px; }
+  .dept-manage-cols .num { text-align: left; }
+}
