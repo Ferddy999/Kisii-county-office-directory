@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Terms and Conditions{% endblock %}
+
+{% block content %}
+<article class="legal-doc">
+  <h1 class="page-title">Terms and Conditions</h1>
+  <p class="sub">County Office Directory, County Government of Kisii. Version {{ legal.version }}, last updated {{ legal.updated }}.</p>
+
+  <h2>1. About this system</h2>
+  <p>The County Office Directory is an internal system of the County Government of Kisii. It lists county departments, directorates, offices, services and the officers who work in them, so that staff and authorised users can find the right office and contact details quickly.</p>
+
+  <h2>2. Who may use it</h2>
+  <p>The system is for authorised county staff and other persons the county ICT office has given an account. You must not use an account that was not issued to you. Administrators can add, change and delete records. Ordinary users can only view and search.</p>
+
+  <h2>3. Your account and sign-in</h2>
+  <p>Keep your password private and do not share the one-time codes we send to your email or phone. Tell the county ICT office at once if you think someone else has used your account. You are responsible for activity carried out under your account.</p>
+
+  <h2>4. Acceptable use</h2>
+  <ul>
+    <li>Use directory information only for county business.</li>
+    <li>Do not copy, sell, publish or pass on directory data to anyone outside the county without authority.</li>
+    <li>Do not try to break into, overload or interfere with the system, or to see data you are not permitted to see.</li>
+    <li>Administrators must enter accurate information and change records only as part of their duties.</li>
+  </ul>
+
+  <h2>5. Accuracy of information</h2>
+  <p>We try to keep records correct, but offices and officers change. Where accuracy matters, confirm details with the office concerned.</p>
+
+  <h2>6. Monitoring and audit</h2>
+  <p>Changes to records are logged with the user, the time and what changed. Sign-ins are also recorded. These logs are used to keep the system secure and accountable.</p>
+
+  <h2>7. Personal data and cookies</h2>
+  <p>How we handle personal data and cookies is explained in the <a href="{% url 'privacy' %}">Privacy and Cookie Policy</a>. By accepting these Terms you confirm you have read it. Your cookie choices are separate and can be changed under <a href="{% url 'cookie_settings' %}">Cookie settings</a>.</p>
+
+  <h2>8. Copyright</h2>
+  <p>&copy; 2026 County Government of Kisii. All rights reserved. The county name, seal and the content of this system belong to the County Government of Kisii and may not be used without its permission.</p>
+
+  <h2>9. Availability and liability</h2>
+  <p>We aim to keep the system available but do not promise uninterrupted service. To the extent the law allows, the county is not liable for loss caused by an outage or by reliance on information that has since changed.</p>
+
+  <h2>10. Suspension</h2>
+  <p>The county may suspend or remove an account that breaks these Terms or that is no longer needed.</p>
+
+  <h2>11. Changes to these Terms</h2>
+  <p>We may update these Terms. When we do, you will be asked to accept the new version the next time you sign in.</p>
+
+  <h2>12. Governing law and contact</h2>
+  <p>These Terms are governed by the laws of Kenya. Questions can be sent to the county ICT office at <a href="mailto:{{ legal.contact_email }}">{{ legal.contact_email }}</a>.</p>
+</article>
+{% endblock %}

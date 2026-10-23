@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Accept the Terms{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+  <div>
+    <h1 class="page-title">Before you continue</h1>
+    <div class="page-subtitle">Please read and accept the Terms and Conditions to use the County Office Directory.</div>
+  </div>
+  <p>The Terms explain who may use the system, how it must be used and how the county protects the personal data in it. Our <a href="{% url 'privacy' %}" target="_blank" rel="noopener">Privacy and Cookie Policy</a> describes what we collect and your rights.</p>
+  <p><a href="{% url 'terms' %}" target="_blank" rel="noopener">Read the Terms and Conditions</a> (opens in a new tab). Version {{ legal.version }}.</p>
+  <form method="post" class="auth-form">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% if error %}<div class="form-error" role="alert">{{ error }}</div>{% endif %}
+    <label class="check-line"><input type="checkbox" name="agree" value="1" required> I have read and accept the Terms and Conditions and the Privacy and Cookie Policy.</label>
+    <button type="submit" class="btn-submit">Accept and continue</button>
+  </form>
+  <form method="post" action="{% url 'logout' %}" class="resend-form">
+    {% csrf_token %}
+    <button type="submit" class="link-button">Decline and sign out</button>
+  </form>
+</div>
+{% endblock %}

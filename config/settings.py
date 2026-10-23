@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.LoginRequiredMiddleware',
     'audit.middleware.AuditUserMiddleware',
+    'core.middleware.TermsAcceptanceMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -153,3 +154,7 @@ PASSWORD_RESET_TIMEOUT = 60 * 60 * 3
 # Sign-in code (one-time password). Set OTP_REQUIRED=False in .env to switch it off.
 OTP_REQUIRED = config("OTP_REQUIRED", default=True, cast=bool)
 SMS_BACKEND = config("SMS_BACKEND", default="console")
+
+
+# Contact shown on the Terms and Privacy pages. Set LEGAL_CONTACT_EMAIL in .env.
+LEGAL_CONTACT_EMAIL = config("LEGAL_CONTACT_EMAIL", default="ict@example.go.ke")

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Cookie settings{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="page-title">Cookie settings</h1>
+  <div class="page-subtitle">Choose which cookies we may use. You can change this at any time.</div>
+</div>
+
+<section class="panel settings-panel">
+  <form method="post" class="settings-form">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="cookie-option">
+      <strong>Essential cookies</strong> <span class="status">Always on</span>
+      <p class="sub">Keep you signed in, protect forms against forgery and remember this choice. The system cannot work without them.</p>
+    </div>
+    <fieldset class="field portal-field">
+      <legend>Usage and performance cookies (optional)</legend>
+      <p class="sub">Help us understand how the directory is used so we can improve it. None are in use today. If they are added later, they are only set if you choose Accept all.</p>
+      <ul>
+        <li><label><input type="radio" name="choice" value="all" {% if current == "all" %}checked{% endif %}> Accept all cookies</label></li>
+        <li><label><input type="radio" name="choice" value="essential" {% if current == "essential" %}checked{% endif %}> Essential cookies only</label></li>
+      </ul>
+    </fieldset>
+    <p class="sub">See the <a href="{% url 'privacy' %}">Privacy and Cookie Policy</a> for the full list.</p>
+    <div><button type="submit" class="btn btn-primary">Save my choice</button></div>
+  </form>
+</section>
+{% endblock %}

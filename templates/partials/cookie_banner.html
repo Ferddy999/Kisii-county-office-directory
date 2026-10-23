@@ -1,0 +1,17 @@
+{% if not cookie_choice %}
+<section class="cookie-banner" role="dialog" aria-labelledby="cookie-title">
+  <div class="container cookie-inner">
+    <div>
+      <h2 id="cookie-title">Cookies on this system</h2>
+      <p>We use essential cookies to keep you signed in and the system secure. With your permission we may also use usage cookies to improve the directory. Read our <a href="{% url 'privacy' %}">Privacy and Cookie Policy</a>.</p>
+    </div>
+    <form method="post" action="{% url 'cookie_settings' %}" class="cookie-actions">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      <button type="submit" name="choice" value="all" class="btn btn-primary">Accept all</button>
+      <button type="submit" name="choice" value="essential" class="btn btn-outline">Essential only</button>
+      <a href="{% url 'cookie_settings' %}" class="btn btn-outline">Customise</a>
+    </form>
+  </div>
+</section>
+{% endif %}

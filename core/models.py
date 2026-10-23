@@ -31,3 +31,27 @@ class UserProfile(TimeStampedModel):
 
     def __str__(self):
         return f"Profile of {self.user}"
+
+
+class ConsentLog(models.Model):
+    """Append-only record of terms acceptance and cookie choices."""
+
+    TERMS = "terms"
+    COOKIES = "cookies"
+    KINDS = [(TERMS, "Terms and Conditions"), (COOKIES, "Cookies")]
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, null=True, blank=True,
+        on_delete=models.SET_NULL, related_name="consent_logs",
+    )
+    username = models.CharField(max_length=150, blank=True)
+    kind = models.CharField(max_length=10, choices=KINDS)
+    version = models.CharField(max_length=20, blank=True)
+    choice = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.username}: {self.kind} {self.choice}"

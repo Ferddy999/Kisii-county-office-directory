@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy and Cookie Policy{% endblock %}
+
+{% block content %}
+<article class="legal-doc">
+  <h1 class="page-title">Privacy and Cookie Policy</h1>
+  <p class="sub">County Office Directory, County Government of Kisii. Last updated {{ legal.updated }}.</p>
+
+  <h2>1. Who we are</h2>
+  <p>The County Government of Kisii runs this system and is the data controller for the personal data in it. We handle personal data in line with the Data Protection Act, 2019 of Kenya.</p>
+
+  <h2>2. What we collect and why</h2>
+  <table class="legal-table">
+    <thead><tr><th>Data</th><th>Why we hold it</th></tr></thead>
+    <tbody>
+      <tr><td>Account details: username, name, email address, phone number and your sign-in code preference</td><td>To create your account, confirm it is you with a one-time code and contact you about your account.</td></tr>
+      <tr><td>Directory records: officers&rsquo; names, designations, work phone numbers and work email addresses, with their offices and departments</td><td>To let users find the right officer or office. This is part of the county&rsquo;s public service work.</td></tr>
+      <tr><td>Audit records: who changed which record, when and what changed, and sign-in activity</td><td>To keep the system secure and accountable.</td></tr>
+      <tr><td>Consent records: when you accepted the Terms and your cookie choices</td><td>To show we asked for and respected your choices.</td></tr>
+    </tbody>
+  </table>
+  <p>We do not collect more than we need, and one-time codes are not stored in readable form and expire after five minutes.</p>
+
+  <h2>3. Who can see it</h2>
+  <p>Directory records are visible to signed-in users. Administrators can change them. Account details and audit records are visible only to administrators. We do not sell personal data. We share it outside the county only where the law requires.</p>
+
+  <h2>4. How long we keep it</h2>
+  <p>Directory records are kept while the officer and office are active and are removed or corrected on request through the ICT office. Account details are kept while the account exists. Audit and consent records are kept for as long as needed for security and accountability, as set by county policy.</p>
+
+  <h2>5. How we protect it</h2>
+  <p>Access needs a password and a one-time code. Passwords are stored in hashed form. Permissions limit what each user can do, and changes are logged.</p>
+
+  <h2>6. Your rights</h2>
+  <p>You may ask to see the personal data we hold about you, have it corrected or deleted, object to how it is used and withdraw consent you have given. Contact the county ICT office at <a href="mailto:{{ legal.contact_email }}">{{ legal.contact_email }}</a>. If you are not satisfied, you may complain to the Office of the Data Protection Commissioner of Kenya.</p>
+
+  <h2>7. Cookies</h2>
+  <p>Cookies are small files a website stores in your browser. We use them as follows.</p>
+  <table class="legal-table">
+    <thead><tr><th>Cookie</th><th>Type</th><th>Purpose</th><th>Lasts</th></tr></thead>
+    <tbody>
+      <tr><td>sessionid</td><td>Essential</td><td>Keeps you signed in</td><td>Until you close the browser, or 8 hours</td></tr>
+      <tr><td>csrftoken</td><td>Essential</td><td>Protects forms against forgery</td><td>Up to 1 year</td></tr>
+      <tr><td>kcd_consent</td><td>Essential</td><td>Remembers your cookie choice</td><td>180 days</td></tr>
+      <tr><td>messages</td><td>Essential</td><td>Shows a confirmation message once</td><td>Until shown</td></tr>
+    </tbody>
+  </table>
+  <p>Usage and performance cookies are optional. None are in use today. If they are introduced, we will only set them if you have chosen Accept all, and we will update this policy.</p>
+  <p>You can change or withdraw your choice at any time under <a href="{% url 'cookie_settings' %}">Cookie settings</a>. You can also clear cookies in your browser, but you will then be signed out.</p>
+
+  <h2>8. Changes to this policy</h2>
+  <p>We will update this page when our practices change, and show the date above.</p>
+
+  <p class="sub">See also the <a href="{% url 'terms' %}">Terms and Conditions</a>. &copy; 2026 County Government of Kisii. All rights reserved.</p>
+</article>
+{% endblock %}

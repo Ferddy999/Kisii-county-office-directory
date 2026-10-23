@@ -356,3 +356,26 @@ a.page:hover { background: var(--page); color: var(--ink); }
 .resend-form { text-align: center; }
 .btn-danger { display: inline-flex; align-items: center; padding: 10px 16px; border: 0; border-radius: 6px; background: #A32323; color: #FFFFFF; font-size: 14px; font-weight: 600; cursor: pointer; }
 .btn-danger:hover { background: #8A1F1F; }
+
+
+/* cookie banner and legal pages */
+.cookie-banner { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: #FFFFFF; border-top: 4px solid #0C3C5C; box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.14); padding: 16px 0; }
+.cookie-inner { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+.cookie-inner h2 { margin: 0 0 4px; font-size: 16px; }
+.cookie-inner p { margin: 0; font-size: 14px; max-width: 760px; }
+.cookie-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.cookie-option p { margin: 4px 0 0; }
+.legal-doc { max-width: 800px; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 8px; padding: 28px; line-height: 1.6; }
+.legal-doc h2 { margin: 24px 0 6px; font-size: 17px; }
+.legal-doc p, .legal-doc li { font-size: 15px; }
+.legal-table { width: 100%; border-collapse: collapse; margin: 8px 0 12px; font-size: 14px; }
+.legal-table th, .legal-table td { text-align: left; vertical-align: top; padding: 8px 10px; border: 1px solid #DDE3EA; }
+.legal-table th { background: #F3F6F9; }
+.legal-note { margin: 0; font-size: 13px; color: #55606E; }
+.check-line { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.check-line input { margin-top: 3px; }
+
+@media (max-width: 720px) {
+  .legal-doc { padding: 18px; }
+  .cookie-actions .btn { flex: 1; justify-content: center; }
+}

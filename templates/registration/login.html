@@ -27,6 +27,7 @@
       {{ form.password }}
     </div>
     <input type="hidden" name="next" value="{{ next }}">
+    <p class="legal-note">By signing in you agree to the <a href="{% url 'terms' %}">Terms and Conditions</a> and the <a href="{% url 'privacy' %}">Privacy and Cookie Policy</a>.</p>
     <button type="submit" class="btn-submit">Sign in</button>
   </form>
   <a href="{% url 'password_reset' %}" class="btn-reset btn-block">Forgot password? Reset it</a>
