@@ -15,7 +15,7 @@
       <a href="{% url 'department_list' %}" {% if request.path|slice:":13" == "/departments/" %}class="active"{% endif %}>Departments</a>
       <a href="{% url 'office_list' %}" {% if request.path|slice:":9" == "/offices/" %}class="active"{% endif %}>Offices</a>
       <a href="{% url 'staff_list' %}" {% if request.path|slice:":7" == "/staff/" %}class="active"{% endif %}>Staff</a>
-      {% if perms.audit.view_auditlog %}<a href="#">Audit log</a>{% endif %}
+      {% if perms.audit.view_auditlog %}<a href="{% url 'audit_log' %}" {% if request.path|slice:":7" == "/audit/" %}class="active"{% endif %}>Audit log</a>{% endif %}
     </nav>
     <div class="userbar">
       <span class="role-pill {% if not is_administrator %}role-pill--user{% endif %}">{{ role_label }}</span>

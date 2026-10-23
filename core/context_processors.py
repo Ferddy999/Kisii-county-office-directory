@@ -1,12 +1,12 @@
-from .roles import ADMIN_GROUP
+from .roles import is_administrator
 
 
 def role(request):
     user = request.user
     if not user.is_authenticated:
         return {}
-    is_admin = user.is_superuser or user.groups.filter(name=ADMIN_GROUP).exists()
+    admin = is_administrator(user)
     return {
-        "is_administrator": is_admin,
-        "role_label": "Administrator" if is_admin else "Ordinary user",
+        "is_administrator": admin,
+        "role_label": "Administrator" if admin else "Ordinary user",
     }

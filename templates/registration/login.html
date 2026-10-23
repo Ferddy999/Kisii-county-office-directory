@@ -13,6 +13,11 @@
     {% if form.non_field_errors %}
     <div class="form-error" role="alert">{{ form.non_field_errors.0 }}</div>
     {% endif %}
+    <fieldset class="field portal-field">
+      <legend>Sign in as</legend>
+      {{ form.portal }}
+      {% for error in form.portal.errors %}<div class="field-error" role="alert">{{ error }}</div>{% endfor %}
+    </fieldset>
     <div class="field">
       <label for="{{ form.username.id_for_label }}">Username</label>
       {{ form.username }}
@@ -24,5 +29,6 @@
     <input type="hidden" name="next" value="{{ next }}">
     <button type="submit" class="btn-submit">Sign in</button>
   </form>
+  <a href="{% url 'password_reset' %}" class="btn-reset btn-block">Forgot password? Reset it</a>
 </div>
 {% endblock %}

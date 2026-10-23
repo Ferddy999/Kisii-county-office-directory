@@ -57,7 +57,7 @@
   <section class="panel panel-side">
     <div class="panel-head">
       <h2 class="panel-title">Recent changes</h2>
-      <span class="panel-note">Administrator only</span>
+      <a href="{% url 'audit_log' %}">View all</a>
     </div>
     {% for c in recent_changes %}
     <div class="change-row">

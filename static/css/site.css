@@ -321,3 +321,20 @@ a.page:hover { background: var(--page); color: var(--ink); }
   .dept-manage-cols, .dir-manage-cols { grid-template-columns: 1fr; gap: 4px; }
   .dept-manage-cols .num { text-align: left; }
 }
+
+
+/* login choice and password reset */
+.portal-field { border: 0; padding: 0; margin: 0; min-width: 0; }
+.portal-field legend { padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 600; }
+.field input[type="radio"] { height: auto; width: 18px; }
+.btn-block { justify-content: center; }
+
+
+/* audit log */
+.audit-cols { grid-template-columns: 150px 110px 90px minmax(0, 1.2fr) minmax(0, 2fr); }
+.status.action-update { background: var(--blue-tint); color: var(--blue-dark); }
+.status.action-delete { background: #FCEBEB; color: #8A1F1F; }
+
+@media (max-width: 720px) {
+  .audit-cols { grid-template-columns: 1fr; gap: 4px; }
+}

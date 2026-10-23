@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Audit log{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="page-title">Audit log</h1>
+  <div class="page-subtitle">Every change made by a signed-in administrator. {{ paginator.count }} entr{{ paginator.count|pluralize:"y,ies" }}.</div>
+</div>
+
+<section class="panel">
+  <div class="result-row audit-cols head">
+    <div>When</div><div>User</div><div>Action</div><div>Record</div><div>Details</div>
+  </div>
+  {% for entry in object_list %}
+  <div class="result-row audit-cols">
+    <div>{{ entry.created_at|date:"j M Y, H:i" }}</div>
+    <div>{{ entry.username|default:"unknown" }}</div>
+    <div><span class="status action-{{ entry.action }}">{{ entry.get_action_display }}</span></div>
+    <div>
+      <div class="strong">{{ entry.object_repr }}</div>
+      <div class="sub">{{ entry.model_name|capfirst }}</div>
+    </div>
+    <div>
+      {% for field, change in entry.changes.items %}
+      <div class="sub"><strong>{{ field }}</strong>:
+        {% if entry.action == "update" %}{{ change.from|default_if_none:"-" }} &rarr; {{ change.to|default_if_none:"-" }}
+        {% elif entry.action == "create" %}{{ change.to|default_if_none:"-" }}
+        {% else %}{{ change.from|default_if_none:"-" }}{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% empty %}
+  <div class="empty">No changes recorded yet.</div>
+  {% endfor %}
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Pagination">
+    <div class="pages">
+      {% if page_obj.has_previous %}<a class="page" href="?page={{ page_obj.previous_page_number }}">Prev</a>{% endif %}
+      <span class="page current" aria-current="page">{{ page_obj.number }}</span>
+      <span class="result-count">of {{ paginator.num_pages }}</span>
+      {% if page_obj.has_next %}<a class="page" href="?page={{ page_obj.next_page_number }}">Next</a>{% endif %}
+    </div>
+  </nav>
+  {% endif %}
+</section>
+{% endblock %}
