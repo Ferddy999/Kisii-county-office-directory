@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="page-title">Settings</h1>
+  <div class="page-subtitle">Your contact details, sign-in code and password.</div>
+</div>
+
+<section class="panel settings-panel">
+  <h2 class="panel-title">Your details</h2>
+  <form method="post" class="settings-form">
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="form-error" role="alert">{{ form.non_field_errors.0 }}</div>{% endif %}
+    {% include "partials/form_field.html" with field=form.first_name %}
+    {% include "partials/form_field.html" with field=form.last_name %}
+    {% include "partials/form_field.html" with field=form.email %}
+    {% include "partials/form_field.html" with field=form.phone %}
+    <fieldset class="field portal-field">
+      <legend>{{ form.otp_channel.label }}</legend>
+      {{ form.otp_channel }}
+      {% for error in form.otp_channel.errors %}<div class="field-error" role="alert">{{ error }}</div>{% endfor %}
+    </fieldset>
+    <div><button type="submit" class="btn btn-primary">Save details</button></div>
+  </form>
+</section>
+
+<section class="panel settings-panel">
+  <h2 class="panel-title">Password</h2>
+  <p class="sub">Change the password you use to sign in.</p>
+  <div><a href="{% url 'password_change' %}" class="btn btn-outline">Change password</a></div>
+</section>
+
+{% if is_administrator %}
+<section class="panel settings-panel">
+  <h2 class="panel-title">Handover</h2>
+  <p class="sub">Delete test records before the system is handed over to the county. This cannot be undone.</p>
+  <div><a href="{% url 'handover' %}" class="btn btn-outline">Open handover cleanup</a></div>
+</section>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Verify it is you{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+  <div>
+    <h1 class="page-title">Check your {{ channel_label }}</h1>
+    <div class="page-subtitle">We sent a 6-digit code to {{ destination }}. It expires in 5 minutes.</div>
+  </div>
+  <form method="post" class="auth-form">
+    {% csrf_token %}
+    {% if error %}<div class="form-error" role="alert">{{ error }}</div>{% endif %}
+    <div class="field">
+      <label for="code">Verification code</label>
+      <input id="code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required autofocus>
+    </div>
+    <button type="submit" class="btn-submit">Verify and sign in</button>
+  </form>
+  <form method="post" class="resend-form">
+    {% csrf_token %}
+    <button type="submit" name="resend" value="1" class="link-button">Send a new code</button>
+  </form>
+  <a href="{% url 'login' %}" class="btn-reset btn-block">Back to sign in</a>
+</div>
+{% endblock %}

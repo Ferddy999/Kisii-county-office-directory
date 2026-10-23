@@ -2,7 +2,7 @@ from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_delete, post_save, pre_save
 
-from .context import current_user
+from .context import current_user, suppressed
 from .models import AuditLog
 
 AUDITED = [
@@ -39,6 +39,8 @@ def snapshot(instance):
 
 
 def acting_user():
+    if suppressed.get():
+        return None
     user = current_user.get()
     if user is not None and user.is_authenticated:
         return user

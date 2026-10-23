@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Handover cleanup{% endblock %}
+
+{% block content %}
+<div>
+  <h1 class="page-title">Handover cleanup</h1>
+  <div class="page-subtitle">Remove test data before county officers take over. Departments and directorates are kept.</div>
+</div>
+
+<section class="panel settings-panel">
+  <form method="post" class="settings-form">
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="form-error" role="alert">{{ form.non_field_errors.0 }}</div>{% endif %}
+    <fieldset class="field portal-field">
+      <legend>{{ form.targets.label }}</legend>
+      {{ form.targets }}
+      {% for error in form.targets.errors %}<div class="field-error" role="alert">{{ error }}</div>{% endfor %}
+    </fieldset>
+    {% include "partials/form_field.html" with field=form.password %}
+    {% include "partials/form_field.html" with field=form.confirm %}
+    <p class="sub">Deleted records cannot be recovered. Take a database backup first if you are unsure.</p>
+    <div>
+      <button type="submit" class="btn btn-danger">Delete selected data</button>
+      <a href="{% url 'account_settings' %}" class="btn btn-outline">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

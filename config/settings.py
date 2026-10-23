@@ -148,3 +148,8 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 EMAIL_BACKEND = config("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL", default="Kisii County Office Directory <no-reply@example.go.ke>")
 PASSWORD_RESET_TIMEOUT = 60 * 60 * 3
+
+
+# Sign-in code (one-time password). Set OTP_REQUIRED=False in .env to switch it off.
+OTP_REQUIRED = config("OTP_REQUIRED", default=True, cast=bool)
+SMS_BACKEND = config("SMS_BACKEND", default="console")
