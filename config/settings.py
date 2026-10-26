@@ -158,3 +158,44 @@ SMS_BACKEND = config("SMS_BACKEND", default="console")
 
 # Contact shown on the Terms and Privacy pages. Set LEGAL_CONTACT_EMAIL in .env.
 LEGAL_CONTACT_EMAIL = config("LEGAL_CONTACT_EMAIL", default="ict@example.go.ke")
+
+
+# ---------------------------------------------------------------------------
+# Production safety, lockout cache, email server and static files
+# ---------------------------------------------------------------------------
+from decouple import Csv
+
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default="", cast=Csv())
+
+SECURE_REFERRER_POLICY = "same-origin"
+X_FRAME_OPTIONS = "DENY"
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SAMESITE = "Lax"
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=True, cast=bool)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+# Shared between server workers, used to count failed sign-ins.
+# Create its table once with: python manage.py createcachetable
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "django_cache",
+        "TIMEOUT": 15 * 60,
+    }
+}
+
+# Real email server (used when EMAIL_BACKEND is the smtp backend)
+EMAIL_HOST = config("EMAIL_HOST", default="")
+EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
+
+# Where "collectstatic" gathers files for the web server
+STATIC_ROOT = BASE_DIR / "staticfiles"

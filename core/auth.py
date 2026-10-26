@@ -12,7 +12,7 @@ from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.http import require_http_methods
 
-from . import otp
+from . import otp, throttle
 from .roles import is_administrator
 
 logger = logging.getLogger(__name__)
@@ -37,6 +37,24 @@ class RoleLoginForm(AuthenticationForm):
         widget=forms.RadioSelect,
         initial="member",
     )
+
+    def clean(self):
+        username = self.cleaned_data.get("username", "")
+        if username and throttle.is_locked(self.request, username):
+            logger.warning("Sign-in blocked for %s: too many failed attempts", username)
+            raise forms.ValidationError(
+                "Too many failed attempts. Please wait 15 minutes and try again.",
+                code="locked",
+            )
+        try:
+            cleaned = super().clean()
+        except forms.ValidationError as error:
+            if getattr(error, "code", None) == "invalid_login":
+                throttle.register_failure(self.request, username)
+                logger.warning("Failed sign-in for %s", username)
+            raise
+        throttle.clear(self.request, username)
+        return cleaned
 
     def confirm_login_allowed(self, user):
         super().confirm_login_allowed(user)
