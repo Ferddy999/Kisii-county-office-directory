@@ -9,7 +9,8 @@
       </div>
     </div>
     {% if user.is_authenticated %}
-    <nav class="site-nav" aria-label="Main">
+    <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button>
+    <nav class="site-nav" id="site-menu" aria-label="Main">
       <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}class="active"{% endif %}>Dashboard</a>
       <a href="{% url 'directory' %}" {% if request.resolver_match.url_name == 'directory' %}class="active"{% endif %}>Directory</a>
       <a href="{% url 'department_list' %}" {% if request.path|slice:":13" == "/departments/" %}class="active"{% endif %}>Departments</a>
